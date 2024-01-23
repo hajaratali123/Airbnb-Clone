@@ -1,7 +1,7 @@
 const Review = require("../models/review.js");
 const Listing = require("../models/listing.js");
 const {reviewSchema} = require("../schema.js");
-
+const Rent= require("../models/Rent.js");
 module.exports.CreateReview = async(req, res) =>{
     let listing = await Listing.findById(req.params.id);
     let NewREview = new Review(req.body.review);
@@ -29,3 +29,4 @@ module.exports.DeleteReview = async(req, res, next) => {
 
 
 };
+

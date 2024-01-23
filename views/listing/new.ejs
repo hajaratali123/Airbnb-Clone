@@ -1,53 +1,63 @@
+
 <% layout("/layouts/boilerplate")%>
 
-
 <div class="row mt-3">
-<div class="col-8 offset-2">
-<h4>Create A new Listing</h4>
-    <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
-        <div class="mb-3 ">
-            <label for="title" class="form-label">Title:</label>
-            <input type="text" name="listing[title]" placeholder="Enter title" class="form-control" required />
-            <div class="valid-feedback"> good!</div>
-        </div>
-       
-
-        <div class="mb-3">
-            <label for="description" class="form-label">Description:</label>
-            <textarea name="listing[description]" id="" cols="5" rows="5" placeholder="description" class="form-control" required></textarea>
-        </div>
-  
-        <div class="mb-3">
-            <label for="image" class="form-label">Upload Image:</label>
-            
-            <input type="file" name="listing[image]" placeholder="Select File" class="form-control" required >
-        </div>
-        <div class="row">
-            <div class="mb-3 col-md-4">
-                <label for="price" class="form-label">Price:</label>
-                <input  name="listing[price]" placeholder="1200" class="form-control" required>
-                <div class="invalid-feedback">enter valid price !</div>
+    <div class="col-8 offset-2">
+        <h4>Create A new Listing</h4>
+        <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" name="listing[title]" placeholder="Enter title" class="form-control" required />
+                <div class="valid-feedback">Good!</div>
             </div>
 
-            <div class="mb-3 col-md-8">
-                <label for="country" class="form-label">Country:</label>
-                <input type="text" name="listing[country]" placeholder="India" class="form-control" required>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea name="listing[description]" cols="5" rows="5" placeholder="Description" class="form-control" required></textarea>
             </div>
 
-        </div>
-      
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image:</label>
+                <input type="file" name="listing[image]" class="form-control" required>
+            </div>
 
-        <div class="mb-3">
-            <label for="location" class="form-label">Location:</label>
-            <input type="text" name="listing[location]" placeholder="Bangalore"
-            class="form-control" required>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="price" class="form-label">Price:</label>
+                    <input name="listing[price]" placeholder="1200" class="form-control" required>
+                    <div class="invalid-feedback">Enter a valid price!</div>
+                </div>
 
-        </div>
+                <div class="mb-3 col-md-8">
+                    <label for="country" class="form-label">City:</label>
+                    <input type="text" name="listing[country]" placeholder="India" class="form-control" required>
+                </div>
+            </div>
 
-        <button class="btn btn-dark add-btn mt-3">ADD</button>
-     
-    </form>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location:</label>
+                <input type="text" name="listing[location]" placeholder="Bangalore" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="category" class="form-label">Category:</label>
+                <select name="listing[category]" class="form-select" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Vacation">Vacation</option>
+                    <option value="Cottage">Cottage</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Condo">Condo</option>
+                    <option value="Townhouse">Townhouse</option>
+                    <option value="Other">Other</option>
+                
+                </select>
+                
+                <div class="invalid-feedback">Please select a category.</div>
+            </div>
+
+            <button class="btn btn-dark add-btn mt-3">ADD</button>
+        </form>
+    </div>
 </div>
-
-</div>
-

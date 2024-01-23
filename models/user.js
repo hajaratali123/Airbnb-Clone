@@ -8,6 +8,18 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    rents: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Rent',
+        },
+    ],
+    menu: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Menu',
+        }
+    ],
 
 });
 

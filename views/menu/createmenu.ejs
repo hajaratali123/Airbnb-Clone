@@ -1,0 +1,74 @@
+<!-- views/menu/create.ejs -->
+
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+        <h4>Add Menu Item for <%= listing.title %></h4>
+
+        <form method="POST" action="/listings/<%= listing._id %>/menu" novalidate class="needs-validation">
+            <div class="mb-3">
+                <label for="itemType" class="form-label">Item Type:</label>
+                <select name="item[itemType]" class="form-select" id="itemType" required>
+                    <option value="veg">Veg</option>
+                    <option value="non-veg">Non-Veg</option>
+                </select>
+                <div class="invalid-feedback">Please select an item type.</div>
+            </div>
+
+            <div class="mb-3">
+                
+                <label for="foodItems" class="form-label">Food Items:</label>
+                <!-- Options for Veg Food Items -->
+                <div id="vegOptions" style="display:none;">
+                    <input type="checkbox" name="item[foodItems][]" value="Paneer Tikka" data-price="7.99"> Paneer Tikka - $7.99<br>
+                    <input type="checkbox" name="item[foodItems][]" value="Veg Biryani" data-price="9.99"> Veg Biryani - $9.99<br>
+                    <input type="checkbox" name="item[foodItems][]" value="Palak Paneer" data-price="8.99"> Palak Paneer - $8.99<br>
+                    <!-- Add more veg options as needed -->
+                </div>
+                
+                <!-- Options for Non-Veg Food Items -->
+                <div id="nonVegOptions" style="display:none;">
+                    <input type="checkbox" name="item[foodItems][]" value="Chicken Tikka" data-price="10.99"> Chicken Tikka - $10.99<br>
+                    <input type="checkbox" name="item[foodItems][]" value="Butter Chicken" data-price="12.99"> Butter Chicken - $12.99<br>
+                    <!-- Add more non-veg options as needed -->
+                </div>
+                <div class="invalid-feedback">Please select at least one food item.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Total Price:</label>
+                <input name="item[price]" id="price" class="form-control" readonly required>
+                <div class="invalid-feedback">Enter a valid price!</div>
+            </div>
+
+            <button class="btn btn-dark add-btn mt-3">Add Item</button>
+        </form>
+    </div>
+</div>
+
+<script src="/js/script.js"></script>
+<script>
+    document.getElementById('itemType').addEventListener('change', function () {
+        var vegOptions = document.getElementById('vegOptions');
+        var nonVegOptions = document.getElementById('nonVegOptions');
+
+        // Toggle visibility based on the selected item type
+        vegOptions.style.display = this.value === 'veg' ? 'block' : 'none';
+        nonVegOptions.style.display = this.value === 'non-veg' ? 'block' : 'none';
+    });
+
+    document.querySelectorAll('input[name="item[foodItems][]"]').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            // Calculate the total price based on selected food items
+            var selectedItems = document.querySelectorAll('input[name="item[foodItems][]"]:checked');
+            var totalPrice = 0;
+            selectedItems.forEach(function (item) {
+                totalPrice += parseFloat(item.dataset.price);
+            });
+
+            // Set the total price in the input field
+            document.getElementById('price').value = totalPrice.toFixed(2);
+        });
+    });
+</script>

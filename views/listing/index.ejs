@@ -18,6 +18,7 @@
     }
     .filter p{
         font-size: 0.8rem;
+        text-decoration: none !important;
 
     }
     .taxinfo{
@@ -35,50 +36,73 @@
       
     }
 
+
+
 </style>
 
     
     <!-- <h1>All Listings</h1> -->
     <div id="filter" >
         <div class="filter">
-            <div> <i class="fa-solid fa-fire"></i></div>
+            <a href="/listings/trending">
+            <div> <i class="fa-solid fa-fire"></i> </a></div>
            <p>Trending</p>
         </div>
         <div class="filter">
-            <div> <i class="fa-solid fa-bed"></i></div>
-           <p>Rooms</p>
+            <div> <a href="/listings/Cottage"><i class="fa-solid fa-house"></i></a></div>
+           <p>Cottage</p>
         </div>
         <div class="filter">
-            <div> <i class="fa-solid fa-mountain-city"></i></div>
-           <p>Iconic Cities</p>
+        <div>
+            <a href="/listings/Residential"><i class="fas fa-home"></i></a> </div>
+            <p>Residential</p>
         </div>
+        
         <div class="filter">
-            <div> <i class="fa-solid fa-mountain"></i></div>
-           <p>Mountain</p>
+       
+              <div> <a href="/listings/Commercial">
+                    <i class="fas fa-building"></i> </a></div>
+                <p>Commercial</p>
         </div>
+        
         <div class="filter">
-            <div> <i class="fa-brands fa-fort-awesome"></i></div>
-           <p>castles</p>
+            <div>
+                <a href="/listings/Vacation"><i class="fas fa-suitcase"></i> </a>
+            </div>
+                <p>Vacation</p>
         </div>
+        
         <div class="filter">
-            <div> <i class="fa-regular fa-snowflake"></i></div>
-           <p>Arctic</p>
+            <div>
+                <a href="/listings/Apartment">
+                    <i class="fas fa-building"></i> </a>
+            </div>
+                <p>Apartment</p>
         </div>
+        
         <div class="filter">
-            <div> <i class="fa-solid fa-campground"></i></div>
-           <p>Camping</p>
+            <div>
+                <a href="/listings/Condo">
+                    <i class="fas fa-building"></i> </a>
+            </div>
+                <p>Condo</p>
         </div>
+        
         <div class="filter">
-            <div> <i class="fa-solid fa-cow"></i></div>
-           <p>Farms</p>
+            <div>
+                <a href="/listings/Townhouse">
+                    <i class="fas fa-home"></i></a>
+            </div>
+                <p>Townhouse</p>
         </div>
+        
         <div class="filter">
-            <div> <i class="fa-solid fa-igloo"></i></div>
-           <p>Domes</p>
-        </div>
-        <div class="filter">
-            <div> <i class="fa-solid fa-ship"></i></div>
-           <p>Boats</p>
+            <div>
+                <a href="/listings/Other">
+                    <i class="fas fa-question"></i></a>
+            </div>
+               <p>Other</p>
+    
         </div>
         <div class="tax-toggle">
             <div class="form-check-reverse form-switch ">
@@ -89,26 +113,37 @@
         </div>
      
 
+
+
+     
+
     </div>
+
+
+
+
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
-    <% for(let listing of AllListings ){ %>
-    <a href="/listings/<%=listing._id%>" class="listing-links">
-
-     <div class="card col listing-card">
-        <img src="<%= listing.image.url %>"" class="card-img-top" alt="listing_image" style="height: 20rem;">
-         <div class="card-img-overlay"> </div>
-            <div class="card-body">
-                <p class="card-text">
-                <b><%= listing.title %> <br></b>
-                    &#8377;<%= listing.price %>/night
-                    <i class="taxinfo"> &nbsp; &nbsp;+18% GST</i>
-                </p>
-
-            </div>
+        <% for(let listing of AllListings ){ %>
+            <a href="/listings/<%=listing._id%>" class="listing-links">
+                <div class="card col listing-card">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+                    <div class="card-img-overlay"> </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b><%= listing.title %> <br></b>
+                            Category: <%= listing.category %><br>
+                            &#8377;<%= listing.price %>/night
+                            <i class="taxinfo"> &nbsp; &nbsp;+18% GST</i>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        <% } %>
     </div>
+    
     </a>
 
-    <% } %> 
+
     
     </div>
  

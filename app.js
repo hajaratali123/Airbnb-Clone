@@ -24,6 +24,10 @@ const listingsRouter= require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const Listing = require("./models/listing.js");
+const RentRouter= require("./routes/rent.js");
+const menuRoutes = require('./routes/memu.js');
+
+const profileRouter = require('./routes/user.js');
 const { error } = require('console');
 
 
@@ -94,13 +98,13 @@ app.use((req, res,next) => {
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
+app.use("/listings/:id/rents",RentRouter);
+app.use('/listings/', menuRoutes);
+app.use('/user', profileRouter);
 app.use("/",userRouter);
 
 
-app.all("*", (req, res,next) => {
-    next(new ExpressError(404,"page not found"));
-}
-);
+
 
 app.use((err, req, res,next) => {
     let {statusCode=500,message="some error"} = err;
@@ -112,3 +116,16 @@ app.listen(8080, () => {
     console.log("listening to port 8080");
 });
 
+
+
+app.get("/",(req, res) => {
+    res.send("Welcome to my website");
+  });
+
+  
+
+
+  app.all("*", (req, res,next) => {
+    next(new ExpressError(404,"page not found"));
+}
+);

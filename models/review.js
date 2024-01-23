@@ -16,7 +16,11 @@ const reviewSchema = new Schema({
     author:{
         type:Schema.Types.ObjectId,
         ref:"User"
-    }
+    },
+     listing: {  // Update the field name to 'listing'
+        type: Schema.Types.ObjectId,
+        ref: "Listing", // Reference the Listing model
+      },
 })
 let Review = mongoose.model("Review",reviewSchema);
 module.exports = Review;

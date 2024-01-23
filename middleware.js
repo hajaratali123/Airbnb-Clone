@@ -7,6 +7,7 @@ module.exports.isLoggedIn=(req,res,next)=>{
 console.log(req.path,"..",req.originalUrl);
     if(!req.isAuthenticated()){
 
+    
         req.session.redirectUrl=req.originalUrl;
 
         req.flash("error","You must be logged in to create a listing!");
@@ -22,6 +23,7 @@ module.exports.saveRedirectUrl=(req,res,next)=>{
     }
     next();
 }
+
 
 module.exports.isOwner= async (req,res,next)=>{
     let {id}=req.params;
@@ -39,9 +41,9 @@ module.exports.validateListing = (req, res,next) => {
     if(error) {
         let errMsg= error.details.map((el)=>el.message).join(",") ;
         throw new ExpressError(400, error.message);
-    }else{
-        next();
     }
+    next();
+    
 
 
  };
@@ -59,13 +61,25 @@ module.exports.validateListing = (req, res,next) => {
 
  };
 
- module.exports.isReviewAuthor= async (req,res,next)=>{
-    let {id,reviewId}=req.params;
-    let review= await Review.findById(reviewId);
+ module.exports.isReviewAuthor = async (req, res, next) => {
+    
+        const { id, reviewId } = req.params;
+        const review = await Review.findById(reviewId);
+        if (!review.author.equals(res.locals.currUser._id)) {
+            req.flash("error", "You are not the author of this review");
+            return res.redirect(`/listings/${id}`);
+          }
 
-    if(!review.author.equals(res.locals.currentUser._id)){
-        req.flash("error","you did not create this review");
-       return res.redirect(`/listings/${id}`);
-    }
-    next();
-}
+        // if (!review) {
+        //     req.flash("error", "Review not found");
+        //     return res.redirect(`/listings/${id}`);
+        // }
+
+        // if (!review.author.equals(res.locals.currentUser._id)) {
+        //     req.flash("error", "You did not create this review");
+        //     return res.redirect(`/listings/${id}`);
+        // }
+
+        next();
+   
+};

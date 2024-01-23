@@ -1,0 +1,41 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+        <h4>User Profile: <%= currentUser.username %></h4>
+ 
+        <p>Email: <%= currentUser.email %></p>
+
+        <h5>Rental History:</h5>
+        <% if (currentUser.rents && currentUser.rents.length > 0) { %>
+            <ul>
+                <% currentUser.rents.forEach(rental => { %>
+                    <li>
+                        Listing: <%= rental.listing && rental.listing.title %><br>
+                        Start Date: <%= rental.startDate %><br>
+                        End Date: <%= rental.endDate %><br>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>No rental history.</p>
+        <% } %>
+
+        <h5>Menu:</h5>
+        <% if (currentUser.menu && currentUser.menu.length > 0) { %>
+            <ul>
+                <% currentUser.menu.forEach(menuItem => { %>
+                    <li>
+                        Item: <%= menuItem.itemName %><br>
+                        Type: <%= menuItem.itemType %><br>
+                        Price: <%= menuItem.price %><br>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>No menu items.</p>
+        <% } %>
+    </div>
+</div>
+
+<script src="/js/script.js"></script>
